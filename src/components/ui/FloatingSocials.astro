@@ -1,0 +1,41 @@
+---
+import { siGithub, siInstagram, siWhatsapp } from 'simple-icons';
+import { socialLinks } from '@/data/personal';
+
+const brandIcons = {
+  github: siGithub,
+  whatsapp: siWhatsapp,
+  instagram: siInstagram,
+} as const;
+---
+
+<nav class="floating-socials" aria-label="Social profiles">
+  {
+    socialLinks.map((link) => {
+      const brandIcon = link.kind === 'linkedin' ? undefined : brandIcons[link.kind];
+      return (
+        <a
+          href={link.href}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={link.label}
+          title={link.label}
+        >
+          {brandIcon ? (
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d={brandIcon.path} fill="currentColor" />
+            </svg>
+          ) : (
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                fill="currentColor"
+                d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14M8.34 17.34V9.65H5.79v7.69h2.55M7.07 8.6a1.48 1.48 0 1 0 0-2.96 1.48 1.48 0 0 0 0 2.96m11.14 8.74v-4.22c0-2.26-1.21-3.31-2.83-3.31A2.44 2.44 0 0 0 13.18 11V9.65h-2.55v7.69h2.55v-3.81c0-1 .19-1.97 1.43-1.97s1.24 1.14 1.24 2.04v3.74h2.36Z"
+              />
+            </svg>
+          )}
+          <span aria-hidden="true">{link.label.replace('Open ', '')}</span>
+        </a>
+      );
+    })
+  }
+</nav>

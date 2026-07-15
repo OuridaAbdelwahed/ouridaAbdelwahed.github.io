@@ -1,0 +1,36 @@
+---
+import { WaterRippleImage } from '@/components/three/WaterRippleImage';
+import { personal } from '@/data/personal';
+import { withBase } from '@/utils/paths';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<section class="hero hero-cinematic section-shell" id="home" aria-labelledby="hero-title">
+  <h1 id="hero-title" class="sr-only">
+    {personal.name} — {personal.role}
+  </h1>
+  <div class="hero-artwork-frame">
+    <WaterRippleImage
+      primaryImage={withBase(base, personal.heroCasaDesktop)}
+      secondaryImage={withBase(base, personal.heroOriginalDesktop)}
+      mobilePrimaryImage={withBase(base, personal.heroCasaMobile)}
+      mobileSecondaryImage={withBase(base, personal.heroOriginalMobile)}
+      primaryAlt={`${personal.name} in a Casa de Papel-inspired cinematic portrait`}
+      secondaryAlt={`${personal.name} standing beside international flags`}
+      width={1448}
+      height={1086}
+      mobileWidth={941}
+      mobileHeight={1672}
+      secondaryScale={[1.18, 1.18]}
+      secondaryOffset={[-0.05, -0.09]}
+      mobileSecondaryScale={[1.2, 1.2]}
+      mobileSecondaryOffset={[-0.036, -0.118]}
+      rippleStrength={0.58}
+      client:idle={{ timeout: 700 }}
+    />
+  </div>
+  <p class="hero-reveal-hint" aria-hidden="true">
+    <span></span> Hover to reveal the original
+  </p>
+</section>

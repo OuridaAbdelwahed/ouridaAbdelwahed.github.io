@@ -1,0 +1,83 @@
+---
+import { Languages, MapPin, ScanLine } from 'lucide-react';
+import SectionHeading from '@/components/common/SectionHeading.astro';
+import { personal } from '@/data/personal';
+import { withBase } from '@/utils/paths';
+
+const base = import.meta.env.BASE_URL;
+const approach = [
+  ['01', 'Understand the real workflow before shaping the interface.'],
+  ['02', 'Connect clear product thinking to reliable implementation.'],
+  ['03', 'Ship, observe, document, and keep improving the system.'],
+];
+---
+
+<section class="about section-pad" id="about" aria-labelledby="about-title">
+  <div class="section-shell">
+    <SectionHeading
+      index="01"
+      eyebrow="Profile / Approach"
+      title="Engineering with context, not just code."
+      description="My work sits where technical systems, visual clarity, and real operational needs meet."
+    />
+
+    <div class="about-layout">
+      <article class="about-story" data-reveal>
+        <p class="large-copy" id="about-title">
+          {personal.profile}
+        </p>
+        <p>
+          From university administration and computer vision to event systems, e-commerce, and
+          inventory tools, I approach every project as a connected product—not an isolated screen.
+        </p>
+        <div class="profile-facts">
+          <div>
+            <MapPin size={18} aria-hidden="true" />
+            <span>Based in</span>
+            <strong>{personal.location}</strong>
+          </div>
+          <div>
+            <Languages size={18} aria-hidden="true" />
+            <span>Working languages</span>
+            <strong>Arabic · French · English</strong>
+          </div>
+        </div>
+      </article>
+
+      <div class="about-gallery" data-reveal>
+        <figure class="gallery-image gallery-image--main">
+          <img
+            src={withBase(base, 'assets/originals/conference.webp')}
+            width="900"
+            height="1200"
+            alt="Abdelwahed seated at an international conference table"
+            loading="lazy"
+            data-parallax
+          />
+          <figcaption>Conference / digital citizenship</figcaption>
+        </figure>
+        <figure class="gallery-image gallery-image--inset">
+          <img
+            src={withBase(base, 'assets/originals/1000082005.jpg')}
+            width="274"
+            height="366"
+            alt="Abdelwahed speaking on a Model United Nations stage"
+            loading="lazy"
+          />
+          <figcaption><ScanLine size={14} aria-hidden="true" /> Field note 02</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="approach-grid">
+      {
+        approach.map(([number, text]) => (
+          <article data-reveal>
+            <span>{number}</span>
+            <p>{text}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

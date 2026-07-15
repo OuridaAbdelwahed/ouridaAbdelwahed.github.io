@@ -1,0 +1,49 @@
+---
+import { GraduationCap } from 'lucide-react';
+import SectionHeading from '@/components/common/SectionHeading.astro';
+import { ImageLightbox } from '@/components/ui/ImageLightbox';
+import { certificates } from '@/data/certificates';
+import { education } from '@/data/education';
+import { withBase } from '@/utils/paths';
+
+const base = import.meta.env.BASE_URL;
+const mappedCertificates = certificates.map((certificate) => ({
+  ...certificate,
+  image: withBase(base, certificate.image),
+}));
+---
+
+<section class="education section-pad" id="education" aria-labelledby="education-title">
+  <div class="section-shell">
+    <SectionHeading
+      index="05"
+      eyebrow="Education / Proof"
+      title="A technical path built step by step."
+      description="Formal education, active specialization, and certificates tied to real participation and professional experience."
+    />
+
+    <div class="education-list">
+      {
+        education.map((item, index) => (
+          <article data-reveal>
+            <div class="education-index">
+              <GraduationCap size={20} aria-hidden="true" /> 0{index + 1}
+            </div>
+            <div>
+              <p>{item.institution}</p>
+              <h3 id={index === 0 ? 'education-title' : undefined}>{item.degree}</h3>
+              <span>{item.detail}</span>
+            </div>
+            <strong>{item.dates}</strong>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="proof-heading" data-reveal>
+      <p class="technical-label">CERTIFICATES / 03</p>
+      <h3>Documents that anchor the story.</h3>
+    </div>
+    <ImageLightbox certificates={mappedCertificates} client:visible />
+  </div>
+</section>

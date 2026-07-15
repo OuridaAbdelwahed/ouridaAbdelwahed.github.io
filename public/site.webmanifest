@@ -1,0 +1,17 @@
+{
+  "name": "Abdelwahed Ourida Portfolio",
+  "short_name": "AO Portfolio",
+  "description": "Data engineering, AI, and full-stack development portfolio of Abdelwahed Ourida.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#070b14",
+  "theme_color": "#070b14",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

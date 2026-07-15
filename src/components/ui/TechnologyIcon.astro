@@ -1,0 +1,105 @@
+---
+import {
+  BrainCircuit,
+  CalendarDays,
+  Code2,
+  Database,
+  DatabaseZap,
+  Languages,
+  LayoutTemplate,
+  Palette,
+  PanelsTopLeft,
+  Rocket,
+  ServerCog,
+  Users,
+  Waypoints,
+} from 'lucide-react';
+import {
+  siBootstrap,
+  siChartdotjs,
+  siCplusplus,
+  siCss,
+  siExpress,
+  siFigma,
+  siHtml5,
+  siInstagram,
+  siJavascript,
+  siJquery,
+  siLaravel,
+  siLinux,
+  siMysql,
+  siNginx,
+  siNodedotjs,
+  siOpencv,
+  siPhp,
+  siPython,
+  siQt,
+  siReact,
+  siSqlite,
+  type SimpleIcon,
+} from 'simple-icons';
+
+interface Props {
+  name: string;
+}
+
+const { name } = Astro.props;
+
+const brandIcons: Record<string, SimpleIcon> = {
+  Python: siPython,
+  OpenCV: siOpencv,
+  HTML5: siHtml5,
+  CSS3: siCss,
+  Bootstrap: siBootstrap,
+  JavaScript: siJavascript,
+  jQuery: siJquery,
+  React: siReact,
+  Figma: siFigma,
+  PHP: siPhp,
+  Laravel: siLaravel,
+  'Node.js': siNodedotjs,
+  'Express.js': siExpress,
+  'C / C++': siCplusplus,
+  MySQL: siMysql,
+  SQLite: siSqlite,
+  Linux: siLinux,
+  Nginx: siNginx,
+  'Chart.js': siChartdotjs,
+  PyQt: siQt,
+  Instagram: siInstagram,
+};
+
+const conceptIcons = {
+  SQL: Database,
+  'Data engineering foundations': DatabaseZap,
+  'AI foundations': BrainCircuit,
+  'REST APIs': Waypoints,
+  PDO: Database,
+  'Database design': DatabaseZap,
+  'Server configuration': ServerCog,
+  'Application deployment': Rocket,
+  'UI/UX design': LayoutTemplate,
+  'Adobe Illustrator': Palette,
+  'Graphic design': Palette,
+  Teamwork: Users,
+  'Web design': PanelsTopLeft,
+  'Event coordination': CalendarDays,
+  i18n: Languages,
+} as const;
+
+const brandIcon = brandIcons[name];
+const ConceptIcon = conceptIcons[name as keyof typeof conceptIcons] ?? Code2;
+---
+
+<span class="technology-icon" data-technology={name} title={name}>
+  {
+    brandIcon ? (
+      <svg viewBox="0 0 24 24" role="img" aria-label={name}>
+        <path d={brandIcon.path} fill="currentColor" />
+      </svg>
+    ) : (
+      <ConceptIcon size={22} strokeWidth={1.65} role="img" aria-label={name} />
+    )
+  }
+  <span class="technology-tooltip" aria-hidden="true">{name}</span>
+</span>

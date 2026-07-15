@@ -1,0 +1,57 @@
+---
+import { BriefcaseBusiness, MapPin } from 'lucide-react';
+import SectionHeading from '@/components/common/SectionHeading.astro';
+import TechnologyIcon from '@/components/ui/TechnologyIcon.astro';
+import { experiences } from '@/data/experiences';
+---
+
+<section class="experience section-pad" id="experience" aria-labelledby="experience-title">
+  <div class="section-shell">
+    <SectionHeading
+      index="03"
+      eyebrow="Experience / Leadership"
+      title="Learning through real responsibility."
+      description="Internships and association work that turned technical practice into visible, collaborative outcomes."
+    />
+
+    <div class="experience-timeline" data-timeline>
+      <div class="timeline-rail" aria-hidden="true"><span data-timeline-line></span></div>
+      {
+        experiences.map((experience, index) => (
+          <article class="experience-item" data-reveal>
+            <div class="experience-marker" aria-hidden="true">
+              0{index + 1}
+            </div>
+            <div class="experience-meta">
+              <span>{experience.type}</span>
+              <strong>{experience.dates}</strong>
+              {experience.location && (
+                <small>
+                  <MapPin size={14} aria-hidden="true" /> {experience.location}
+                </small>
+              )}
+            </div>
+            <div class="experience-content">
+              <p class="technical-label">{experience.organization}</p>
+              <h3 id={index === 0 ? 'experience-title' : undefined}>{experience.role}</h3>
+              <p>{experience.description}</p>
+              <ul>
+                {experience.responsibilities.map((responsibility) => (
+                  <li>{responsibility}</li>
+                ))}
+              </ul>
+              {experience.technologies && (
+                <div class="technology-row" aria-label="Technologies used">
+                  {experience.technologies.map((technology) => (
+                    <TechnologyIcon name={technology} />
+                  ))}
+                </div>
+              )}
+            </div>
+            <BriefcaseBusiness className="experience-icon" size={24} aria-hidden="true" />
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

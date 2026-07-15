@@ -1,0 +1,74 @@
+---
+import { ArrowUpRight } from 'lucide-react';
+import SectionHeading from '@/components/common/SectionHeading.astro';
+import { DataField } from '@/components/three/DataField';
+import TechnologyIcon from '@/components/ui/TechnologyIcon.astro';
+import { services } from '@/data/services';
+import { skillGroups } from '@/data/skills';
+---
+
+<section class="capabilities section-pad" id="capabilities" aria-labelledby="capabilities-title">
+  <div class="section-shell">
+    <SectionHeading
+      index="02"
+      eyebrow="Capabilities / Technical Field"
+      title="From interface to infrastructure."
+      description="A connected toolkit for shaping products, engineering workflows, and getting them into real environments."
+    />
+
+    <div class="capability-hero" data-reveal>
+      <div class="capability-copy">
+        <p class="technical-label">SYSTEM MAP / LIVE</p>
+        <h3 id="capabilities-title">One product mindset across every layer.</h3>
+        <p>
+          I combine data and AI foundations with full-stack development, design, database thinking,
+          and deployment—so decisions remain connected from concept to operation.
+        </p>
+      </div>
+      <DataField client:visible />
+      <div class="field-legend" aria-hidden="true">
+        <span><i></i> Product layer</span>
+        <span><i></i> Intelligence layer</span>
+        <span><i></i> Operations layer</span>
+      </div>
+    </div>
+
+    <div class="service-list">
+      {
+        services.map((service) => (
+          <article class="service-row" data-reveal>
+            <span>{service.signal}</span>
+            <h3>{service.title}</h3>
+            <p>{service.description}</p>
+            <ArrowUpRight size={20} aria-hidden="true" />
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="skills-heading" data-reveal>
+      <p class="technical-label">TECHNOLOGY INDEX</p>
+      <span>Readable without animation. Grouped by real working context.</span>
+    </div>
+    <div class="skills-grid">
+      {
+        skillGroups.map((group, index) => (
+          <article class:list={['skill-group', index === 0 && 'skill-group--accent']} data-reveal>
+            <div class="skill-group-head">
+              <span>0{index + 1}</span>
+              <h3>{group.title}</h3>
+            </div>
+            <p>{group.description}</p>
+            <ul aria-label={`${group.title} technologies`}>
+              {group.skills.map((skill) => (
+                <li>
+                  <TechnologyIcon name={skill} />
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

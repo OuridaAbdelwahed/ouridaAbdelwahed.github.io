@@ -1,0 +1,135 @@
+---
+import { ArrowUpRight, Cpu, Database, ScanFace, Waypoints } from 'lucide-react';
+import SectionHeading from '@/components/common/SectionHeading.astro';
+import TechnologyIcon from '@/components/ui/TechnologyIcon.astro';
+import { projects } from '@/data/projects';
+import { withBase } from '@/utils/paths';
+
+const base = import.meta.env.BASE_URL;
+const signalIcons = [ScanFace, Database, Waypoints, Cpu];
+---
+
+<section class="projects section-pad" id="projects" aria-labelledby="projects-title">
+  <div class="section-shell">
+    <SectionHeading
+      index="04"
+      eyebrow="Selected Work / Systems"
+      title="Projects with workflows behind them."
+      description="Real academic, internship, personal, and business-software projects—presented without invented metrics or placeholder case studies."
+    />
+
+    <div class="featured-projects">
+      {
+        projects
+          .filter((project) => project.featured)
+          .map((project, index) => (
+            <article class="featured-project" data-reveal>
+              <div class="project-visual">
+                {project.image ? (
+                  <img
+                    src={withBase(base, project.image)}
+                    width="960"
+                    height="1280"
+                    alt={project.imageAlt}
+                    loading="lazy"
+                    data-parallax
+                  />
+                ) : (
+                  <div class="project-blueprint" aria-hidden="true">
+                    <span class="blueprint-node blueprint-node--one" />
+                    <span class="blueprint-node blueprint-node--two" />
+                    <span class="blueprint-node blueprint-node--three" />
+                    <i />
+                    <i />
+                    <i />
+                    <strong>
+                      EST / ADMIN
+                      <br />
+                      SYSTEM MAP
+                    </strong>
+                  </div>
+                )}
+                <span class="project-number">0{index + 1}</span>
+              </div>
+              <div class="project-detail">
+                <div class="project-topline">
+                  <span>{project.category}</span>
+                  <span>{project.status}</span>
+                </div>
+                <h3 id={index === 0 ? 'projects-title' : undefined}>{project.title}</h3>
+                <p class="project-summary">{project.summary}</p>
+                <dl>
+                  <div>
+                    <>
+                      <dt>Context</dt>
+                      <dd>{project.context}</dd>
+                    </>
+                  </div>
+                  <div>
+                    <>
+                      <dt>Solution</dt>
+                      <dd>{project.solution}</dd>
+                    </>
+                  </div>
+                </dl>
+                <ul class="feature-list">
+                  {project.features.map((feature) => (
+                    <li>{feature}</li>
+                  ))}
+                </ul>
+                <div class="technology-row" aria-label="Technologies used">
+                  {project.technologies.map((technology) => (
+                    <TechnologyIcon name={technology} />
+                  ))}
+                </div>
+              </div>
+            </article>
+          ))
+      }
+    </div>
+
+    <div class="secondary-projects">
+      {
+        projects
+          .filter((project) => !project.featured)
+          .map((project, index) => {
+            const Icon = signalIcons[index % signalIcons.length] ?? Cpu;
+            return (
+              <article class="project-card" data-reveal>
+                <div class="project-card-graphic" aria-hidden="true">
+                  <Icon size={34} strokeWidth={1.25} />
+                  <>
+                    <span />
+                    <span />
+                    <span />
+                  </>
+                </div>
+                <div class="project-card-index">0{index + 3}</div>
+                <p class="technical-label">{project.category}</p>
+                <h3>{project.title}</h3>
+                <p>{project.summary}</p>
+                <ul>
+                  {project.features.slice(0, 3).map((feature) => (
+                    <li>{feature}</li>
+                  ))}
+                </ul>
+                <div class="project-card-footer">
+                  <div class="technology-row" aria-label="Technologies used">
+                    {project.technologies.slice(0, 4).map((technology) => (
+                      <TechnologyIcon name={technology} />
+                    ))}
+                  </div>
+                  <ArrowUpRight size={20} aria-hidden="true" />
+                </div>
+              </article>
+            );
+          })
+      }
+    </div>
+
+    <p class="project-note" data-reveal>
+      Repository and live-demo URLs are intentionally omitted because none were present in the
+      source portfolio or CV.
+    </p>
+  </div>
+</section>

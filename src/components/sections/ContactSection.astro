@@ -1,0 +1,52 @@
+---
+import { ArrowUp, Download, Phone } from 'lucide-react';
+import { CopyEmail } from '@/components/ui/CopyEmail';
+import { navigation } from '@/data/navigation';
+import { personal } from '@/data/personal';
+import { withBase } from '@/utils/paths';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<section class="contact section-pad" id="contact" aria-labelledby="contact-title">
+  <div class="section-shell">
+    <div class="contact-grid">
+      <div class="contact-heading" data-reveal>
+        <p class="technical-label">06 / START A CONVERSATION</p>
+        <h2 id="contact-title">Have a useful system in mind?</h2>
+        <p>
+          I’m open to internships and serious collaborations across data, AI, full-stack products,
+          business software, and creative interface work.
+        </p>
+      </div>
+      <div class="contact-panel" data-reveal>
+        <span>Direct channel</span>
+        <CopyEmail email={personal.email} client:visible />
+        <a class="phone-link" href="tel:+212674959442">
+          <Phone size={18} aria-hidden="true" />
+          {personal.phone}
+        </a>
+        <a class="button button-secondary" href={withBase(base, personal.cvPath)} download>
+          Download CV <Download size={18} aria-hidden="true" />
+        </a>
+        <small>No contact form. Your message opens directly in your email application.</small>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <div class="footer-brand">
+        <span>AO</span>
+        <p>{personal.name}<br />{personal.shortRole}</p>
+      </div>
+      <nav aria-label="Footer navigation">
+        {navigation.map((item) => <a href={item.href}>{item.label}</a>)}
+      </nav>
+      <div class="footer-meta">
+        <a href="#home" aria-label="Back to top"
+          >Back to top <ArrowUp size={16} aria-hidden="true" /></a
+        >
+        <p>© {new Date().getFullYear()} {personal.name}</p>
+      </div>
+    </footer>
+  </div>
+</section>

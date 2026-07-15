@@ -1,0 +1,11 @@
+.DS_Store
+Thumbs.db
+node_modules/
+dist/
+.astro/
+.edge-qa-profile/
+.edge-webgl-profile/
+.edge-capture-profile/
+preview.*.log
+desktop.png
+mobile.png
